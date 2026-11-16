@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html><head><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KJ Pay - Send Money Fast | Benin City</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#F2F6FF;color:#0B1A3A}
+.top{background:#0B1A3A;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;color:#fff}
+.logo{font-size:24px;font-weight:900}.logo span{color:#00C853}
+.c{padding:16px;max-width:520px;margin:0 auto;padding-bottom:110px}
+.card{background:#fff;border-radius:22px;padding:18px;margin-top:14px;box-shadow:0 8px 20px rgba(0,82,255,.08)}
+.btn{background:linear-gradient(135deg,#00C853,#00E676);color:#fff;border:none;padding:15px;width:100%;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;cursor:pointer}
+.btn.b{background:linear-gradient(135deg,#0B1A3A,#0052FF)}
+.btn.o{background:linear-gradient(135deg,#F7931A,#FFB800);color:#000}
+.btn.w{background:#fff;color:#0052FF;border:2px solid #0052FF}
+input,select{width:100%;padding:15px;border:2px solid #D6E0FF;border-radius:14px;margin-top:10px;font-size:15px}
+.small{color:#5A6A8A;font-size:12px;line-height:1.6}
+.hero{background:linear-gradient(135deg,#0B1A3A,#00C853);color:#fff;border-radius:26px;padding:22px}
+.big{font-size:32px;font-weight:900}.big span{font-size:13px;color:#C8F7D4}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px;text-align:center}
+.act{background:#F2F6FF;border-radius:16px;padding:12px 4px;cursor:pointer;font-size:11px;font-weight:700}.act span{font-size:24px;display:block}
+.bankRow{display:flex;justify-content:space-between;align-items:center;background:#F2F6FF;border-radius:14px;padding:12px;margin-top:8px;cursor:pointer}
+.bankRow b{font-size:14px}.bankRow div{font-size:11px;color:#5A6A8A}
+.tabs{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:12px 0;max-width:520px;margin:0 auto}
+.tab{font-size:11px;text-align:center;flex:1;padding:6px;border-radius:12px;cursor:pointer;color:#5A6A8A}
+.tab.on{color:#fff;background:#00C853}.tab span{display:block;font-size:20px}
+.hidden{display:none}
+.tx{background:#F2F6FF;border-radius:14px;padding:12px;margin-top:8px;display:flex;justify-content:space-between}
+.tx b{font-size:14px}.tx span{font-size:11px;color:#5A6A8A}
+.badge{padding:4px 8px;border-radius:20px;font-size:10px;font-weight:800;color:#fff;background:#00C853}
+.badge.pending{background:#FFB800;color:#000}
+.avatar{width:44px;height:44px;border-radius:50%;background:#00C853;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px}
+.demo{background:#FFF3E0;border:2px dashed #FF6D00;border-radius:14px;padding:12px;margin-top:10px;color:#0B1A3A}
+</style></head>
+<body>
+<div class="top"><div class="logo">KJ<span> Pay</span></div><div style="font-size:12px;">🇳🇬 Benin City • <span style="color:#00E676;">● Demo Mode</span></div></div>
+<div class="c">
+
+<!-- LOGIN / SIGNUP -->
+<div id="authBox" class="card">
+<h2 style="margin:0;">Welcome to KJ Pay 💚</h2><p class="small">Send money to any bank in Nigeria. Send to phone number. No wahala. Your phone number IS your account number.</p>
+<input id="userName" placeholder="Full Name e.g. John Osas">
+<input id="userPhone" placeholder="Phone Number e.g. 08031234567" type="tel" maxlength="11">
+<input id="userPin" placeholder="Create 4-digit PIN e.g. 1234" type="password" maxlength="4">
+<button class="btn" onclick="createAccount()">🚀 Create My KJ Pay Account</button>
+<div class="demo"><b>🎁 DEMO BONUS:</b> New account gets <b>₦5,000</b> demo balance to test transfers instantly. Real launch = ₦0, partner bank holds real money.</div>
+<p class="small" style="text-align:center;">By continuing, you agree to KJ Pay Terms. NDIC insured via partner bank (when live).</p>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dash" class="hidden">
+<div class="hero">
+<p style="font-size:11px;margin:0;">TOTAL BALANCE • <span id="acctNameTop">—</span></p>
+<div class="big">₦<span id="balance">0.00</span></div>
+<p style="font-size:12px;margin:4px 0;">KJ Pay Account: <b id="myAcctNum" style="background:rgba(255,255,255,.25);padding:4px 10px;border-radius:20px;">—</b></p>
+<p style="font-size:11px;">👆 Your phone number IS your account number. Give it to anyone to send you money.</p>
+<button class="btn w" style="background:#fff;color:#0B1A3A;border:none;" onclick="copyAcct()">📋 Copy My Account Number</button>
+</div>
+
+<div class="grid">
+<div class="act" onclick="openTransfer('bank')"><span>🏦</span>To Bank</div>
+<div class="act" onclick="openTransfer('phone')"><span>📱</span>To Phone</div>
+<div class="act" onclick="openTransfer('kjpay')"><span>💚</span>KJ to KJ</div>
+<div class="act" onclick="addMoney()"><span>➕</span>Add Money</div>
+</div>
+
+<div class="card"><h3 style="margin:0;">Quick Send — Recent Contacts</h3><p class="small">Tap to send again fast.</p><div id="contacts"></div></div>
+
+<!-- TRANSFER BOX -->
+<div id="transferBox" class="card hidden">
+<h3 style="margin:0;" id="transferTitle">💸 Transfer</h3>
+<div id="transferForm"></div>
+</div>
+
+<div class="card"><h3 style="margin:0;">💰 Add Money (Demo)</h3><p class="small">In live version: Bank Transfer to your virtual account, Card, or USSD.</p><button class="btn b" onclick="addMoney()">+ Add ₦1,000 Demo Money</button></div>
+
+<div class="card"><h3 style="margin:0;">🎁 Refer & Earn</h3><p class="small">Share KJ Pay, earn ₦100 per friend who signs up (when live).</p><input id="refLink" readonly value=""><button class="btn w" onclick="copyRef()">Copy Referral Link</button></div>
+</div>
+
+<!-- HISTORY TAB -->
+<div id="tab-history" class="hidden">
+<div class="card"><h3 style="margin:0;">📜 Transaction History</h3><div id="historyList">No transactions yet.</div><button class="btn w" onclick="exportHistory()">📥 Download Statement</button></div>
+</div>
+
+<!-- CARDS / MORE TAB -->
+<div id="tab-more" class="hidden">
+<div class="card"><h3 style="margin:0;">💳 My KJ Pay Card (Coming Soon)</h3><div style="background:linear-gradient(135deg,#0B1A3A,#00C853);color:#fff;border-radius:18px;padding:18px;margin-top:10px;"><div style="font-size:20px;font-weight:900;">KJ PAY • VIRTUAL CARD</div><div style="font-size:18px;letter-spacing:2px;margin:12px 0;">5399 •••• •••• <span id="cardLast">4821</span></div><div style="display:flex;justify-content:space-between;font-size:12px;"><span id="cardName">YOUR NAME</span><span>12/29</span></div></div><p class="small">Use for online shopping, Netflix, etc. Issued by partner bank when live.</p></div>
+<div class="card"><h3 style="margin:0;">⚙️ Account Settings</h3><p class="small">Name: <b id="setName">—</b><br>Phone / Account: <b id="setPhone">—</b><br>PIN: ••••</p><button class="btn r" style="background:#FF3B30;" onclick="logout()">🚪 Logout</button></div>
+<div class="card"><h3 style="margin:0;">ℹ️ About KJ Pay</h3><p class="small"><b>Demo Mode:</b> All money here is demo for testing.<br><b>Live Mode:</b> Requires partnership with a CBN-licensed MFB / PSB / BaaS provider (Anchor, Zone, Brass). They hold real money, do KYC & NDIC insurance. KJ Pay provides the app.<br><br>Contact: support@kjpay.ng | Benin City, Edo State</p></div>
+</div>
+
+</div>
+<div class="tabs"><div class="tab on" onclick="showTab('home')"><span>🏠</span>Home</div><div class="tab" onclick="showTab('history')"><span>🕒</span>History</div><div class="tab" onclick="showTab('more')"><span>⋯</span>More</div></div>
+
+<script>
+var user=null, balance=0, history=[];
+var BANKS=["Access Bank","First Bank","GTBank","UBA","Zenith Bank","OPay Digital Services","PalmPay","Moniepoint MFB","Kuda MFB","Union Bank","Fidelity Bank","Wema Bank","Sterling Bank","Stanbic IBTC","Ecobank","Polaris Bank","Keystone Bank","Jaiz Bank","Providus Bank","Parallex Bank","VFD MFB","Carbon","FairMoney MFB","Rubies MFB","Sparkle MFB"];
+function fmt(n){ return n.toLocaleString("en-NG",{minimumFractionDigits:2, maximumFractionDigits:2}); }
+function save(){ if(user){ localStorage.setItem("kjpay_user", JSON.stringify({user:user, bal:balance, hist:history})); } }
+function load(){
+  try{ var s=JSON.parse(localStorage.getItem("kjpay_user")||"null"); if(s){ user=s.user; balance=s.bal||0; history=s.hist||[]; showDash(); } }catch(e){}
+}
+function createAccount(){
+  var name=document.getElementById("userName").value.trim();
+  var phone=document.getElementById("userPhone").value.trim().replace(/\D/g,"");
+  var pin=document.getElementById("userPin").value.trim();
+  if(name.length<3){ alert("Enter full name"); return; }
+  if(phone.length!==11 || !phone.startsWith("0")){ alert("Enter 11-digit phone e.g. 08031234567"); return; }
+  if(pin.length!==4){ alert("Create 4-digit PIN"); return; }
+  user={name:name, phone:phone, pin:pin, acct:phone};
+  balance=5000; history=[{type:"credit", amt:5000, to:"KJ Pay Welcome Bonus", method:"Bonus", time:new Date().toLocaleString(), status:"Success"}];
+  save(); showDash();
+  alert("✅ Welcome "+name+"!\nYour KJ Pay Account Number is:\n"+phone+"\nGive this number to anyone to send you money!\n\n🎁 You got ₦5,000 demo bonus!");
+}
+function showDash(){
+  document.getElementById("authBox").style.display="none";
+  document.getElementById("dash").classList.remove("hidden");
+  document.getElementById("acctNameTop").innerText=user.name;
+  document.getElementById("myAcctNum").innerText=user.acct;
+  document.getElementById("setName").innerText=user.name;
+  document.getElementById("setPhone").innerText=user.phone+" (Account No)";
+  document.getElementById("cardName").innerText=user.name.toUpperCase();
+  document.getElementById("refLink").value="https://kjbtc-mining.onrender.com/kjpay.html?ref="+user.phone;
+  updateUI(); renderContacts(); renderHistory();
+}
+function updateUI(){ document.getElementById("balance").innerText=fmt(balance); save(); }
+function copyAcct(){
+  var t=document.getElementById("myAcctNum").innerText;
+  try{ navigator.clipboard.writeText(t); }catch(e){}
+  alert("Copied: "+t+"\nShare this number — anyone can send you money with it!");
+}
+function copyRef(){ var l=document.getElementById("refLink"); l.select(); try{document.execCommand("copy");}catch(e){} alert("Referral link copied!"); }
+function addMoney(){ balance+=1000; history.unshift({type:"credit", amt:1000, to:"Added Money - Demo Top-up", method:"Top-up", time:new Date().toLocaleString(), status:"Success"}); updateUI(); renderHistory(); alert("✅ +₦1,000 added (Demo)"); }
+function openTransfer(mode){
+  document.getElementById("transferBox").classList.remove("hidden");
+  document.getElementById("transferBox").scrollIntoView({behavior:"smooth"});
+  var bankOpts=BANKS.map(function(b){ return "<option>"+b+"</option>"; }).join("");
+  if(mode==="bank"){
+    document.getElementById("transferTitle").innerText="🏦 Transfer To Other Bank";
+    document.getElementById("transferForm").innerHTML=
+      "<p class='small'>Send to ANY bank in Nigeria — Access, GTB, First Bank, OPay, PalmPay, Moniepoint, etc.</p>"+
+      "<select id='tBank'>"+bankOpts+"</select>"+
+      "<input id='tAcct' placeholder='Recipient Account Number (10 digits)' maxlength='10' type='tel'>"+
+      "<input id='tName' placeholder='Recipient Name (auto-check in live version)'>"+
+      "<button class='btn w' onclick='verifyName()'>🔍 Verify Name</button>"+
+      "<input id='tAmt' type='number' placeholder='Amount ₦ e.g. 2000'>"+
+      "<input id='tNote' placeholder='Narration e.g. For food'>"+
+      "<p class='small'>Fee: <b>₦10</b> • Arrives in seconds (Live: via NIP / NIBSS)</p>"+
+      "<button class='btn' onclick=\"doTransfer('Bank')\">💸 Send To Bank →</button>";
+  }
+  if(mode==="phone"){
+    document.getElementById("transferTitle").innerText="📱 Transfer Using Phone Number";
+    document.getElementById("transferForm").innerHTML=
+      "<p class='small'><b>Phone number = Account number!</b> Just type their 11-digit phone number. Works even if they don't have KJ Pay — they get SMS to claim it.</p>"+
+      "<input id='tPhone' placeholder='Recipient Phone e.g. 08031234567' type='tel' maxlength='11'>"+
+      "<input id='tName' placeholder='Recipient Name'>"+
+      "<input id='tAmt' type='number' placeholder='Amount ₦ e.g. 2000'>"+
+      "<input id='tNote' placeholder='Narration e.g. Happy birthday'>"+
+      "<p class='small'>Fee: <b>₦0 FREE</b> • Instant</p>"+
+      "<button class='btn' onclick=\"doTransfer('Phone')\">💸 Send To Phone Number →</button>";
+  }
+  if(mode==="kjpay"){
+    document.getElementById("transferTitle").innerText="💚 KJ to KJ (Free & Instant)";
+    document.getElementById("transferForm").innerHTML=
+      "<p class='small'>Send to another KJ Pay user using their phone / KJ Pay account number. FREE.</p>"+
+      "<input id='tPhone' placeholder='KJ Pay Account = Phone e.g. 08031234567' type='tel' maxlength='11'>"+
+      "<input id='tName' placeholder='Recipient Name'>"+
+      "<input id='tAmt' type='number' placeholder='Amount ₦ e.g. 2000'>"+
+      "<input id='tNote' placeholder='Narration'>"+
+      "<p class='small'>Fee: <b>₦0 FREE</b> • Instant</p>"+
+      "<button class='btn' onclick=\"doTransfer('KJPay')\">💸 Send To KJ Pay User →</button>";
+  }
+}
+function verifyName(){
+  var acct=document.getElementById("tAcct").value.trim();
+  if(acct.length!==10){ alert("Enter 10-digit account number first"); return; }
+  var names=["Adaeze Okonkwo","Chinedu Eze","Funke Adeyemi","Osas Idemudia","Blessing Okafor","Tunde Bakare","Amaka Nwosu","Efe Oghene"];
+  var n=names[Math.floor(Math.random()*names.length)];
+  document.getElementById("tName").value=n;
+  alert("✅ Name found: "+n+"\nBank: "+document.getElementById("tBank").value+"\n(In live version, this is real NIBSS name enquiry)");
+}
+function doTransfer(method){
+  var amt=parseFloat(document.getElementById("tAmt").value||0);
+  var note=document.getElementById("tNote").value||"Transfer";
+  var toName=document.getElementById("tName").value||"Recipient";
+  var toDetail="";
+  if(method==="Bank"){
+    var bank=document.getElementById("tBank").value;
+    var acct=document.getElementById("tAcct").value.trim();
+    if(acct.length!==10){ alert("Enter 10-digit account number"); return; }
+    if(!toName || toName==="Recipient"){ alert("Click Verify Name first"); return; }
+    toDetail=toName+" • "+bank+" • "+acct;
+  } else {
+    var phone=document.getElementById("tPhone").value.trim().replace(/\D/g,"");
+    if(phone.length!==11){ alert("Enter 11-digit phone number e.g. 08031234567"); return; }
+    if(phone===user.phone){ alert("You cannot send to yourself"); return; }
+    toDetail=toName+" • Phone / Acct: "+phone;
+  }
+  if(amt<=0){ alert("Enter amount"); return; }
+  var fee = method==="Bank" ? 10 : 0;
+  var total=amt+fee;
+  if(total>balance){ alert("Insufficient balance. You have ₦"+fmt(balance)+", need ₦"+fmt(total)+" (incl ₦"+fee+" fee)"); return; }
+  var pin=prompt("Enter your 4-digit KJ Pay PIN to confirm ₦"+fmt(amt)+" to "+toName);
+  if(pin===null) return;
+  if(pin!==user.pin){ alert("❌ Wrong PIN!"); return; }
+  balance-=total;
+  history.unshift({type:"debit", amt:amt, fee:fee, to:toDetail, method:method, note:note, time:new Date().toLocaleString(), status:"Success"});
+  // Simulate recipient gets it if it's a KJ user - for demo, add contact
+  updateUI(); renderHistory(); renderContacts();
+  document.getElementById("transferBox").classList.add("hidden");
+  alert("✅ SENT!\n₦"+fmt(amt)+" to "+toName+"\nFee: ₦"+fee+"\nMethod: "+method+"\nRef: KJ"+Date.now().toString().slice(-8)+"\n\nIn live version, recipient gets SMS instantly.");
+}
+function renderContacts(){
+  var uniq={};
+  history.forEach(function(h){ if(h.to && h.to!=="KJ Pay Welcome Bonus"){ uniq[h.to]=h; } });
+  var keys=Object.keys(uniq).slice(0,4);
+  if(keys.length===0){ document.getElementById("contacts").innerHTML="<p class='small'>No contacts yet. Make your first transfer!</p>"; return; }
+  document.getElementById("contacts").innerHTML=keys.map(function(k){
+    var h=uniq[k]; var initial=(h.to||"U").charAt(0).toUpperCase();
+    return "<div class='bankRow' onclick=\"quickSend('"+h.to.replace(/'/g,'')+"')\"><div style='display:flex;align-items:center;gap:10px;'><div class='avatar'>"+initial+"</div><div style='text-align:left;'><b>"+h.to.split('•')[0]+"</b><div>"+h.method+" • "+h.to.split('•').slice(1).join('•')+"</div></div></div><div style='color:#00C853;font-weight:800;'>Send →</div></div>";
+  }).join("");
+}
+function quickSend(to){
+  // Open phone transfer with name prefilled
+  openTransfer('phone');
+  setTimeout(function(){
+    try{ document.getElementById("tName").value=to.split('•')[0].trim(); }catch(e){}
+  },100);
+}
+function renderHistory(){
+  if(history.length===0){ document.getElementById("historyList").innerHTML="No transactions yet."; return; }
+  document.getElementById("historyList").innerHTML=history.map(function(h){
+    var sign=h.type==="credit"?"+":"-"; var color=h.type==="credit"?"#00C853":"#FF3B30";
+    return "<div class='tx'><div><b>"+h.to+"</b><br><span>"+h.time+" • "+h.method+(h.note?" • "+h.note:"")+(h.fee?" • Fee ₦"+h.fee:"")+"</span></div><div style='text-align:right;'><b style='color:"+color+"'>"+sign+"₦"+fmt(h.amt)+"</b><br><span class='badge'>"+h.status+"</span></div></div>";
+  }).join("");
+}
+function exportHistory(){
+  var txt="KJ PAY STATEMENT\nName: "+user.name+"\nAccount: "+user.phone+"\nBalance: ₦"+fmt(balance)+"\n\n"+history.map(function(h){ return h.time+" | "+h.type.toUpperCase()+" | ₦"+fmt(h.amt)+" | "+h.to+" | "+h.method; }).join("\n");
+  var blob=new Blob([txt],{type:"text/plain"}); var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="kjpay-statement.txt"; a.click();
+  alert("Statement downloaded!");
+}
+function logout(){ if(confirm("Logout?")){ localStorage.removeItem("kjpay_user"); location.reload(); } }
+function showTab(t){
+  document.getElementById("dash").classList.toggle("hidden", t!=="home");
+  document.getElementById("tab-history").classList.toggle("hidden", t!=="history");
+  document.getElementById("tab-more").classList.toggle("hidden", t!=="more");
+  var tabs=document.querySelectorAll(".tab"); tabs.forEach(function(e){e.classList.remove("on");});
+  if(t==="home") tabs[0].classList.add("on"); if(t==="history") tabs[1].classList.add("on"); if(t==="more") tabs[2].classList.add("on");
+}
+window.onload=load;
+</script>
+</body></html>
