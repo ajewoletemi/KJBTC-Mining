@@ -1,0 +1,52 @@
+
+## How To Connect Real Miner (ASIC)
+
+Pool: `stratum+tcp://stratum.ckpool.org:3333`
+Worker: `YOUR_BTC_WALLET.KJBTC1`
+Password: `x`
+
+Example:
+- Pool URL: stratum+tcp://stratum.ckpool.org:3333
+- Worker: bc1qxyz...123.KJBTC1
+- Password: x
+
+Check hashrate after 10 mins at ckpool.org
+
+Other Free Pools:
+- Braiins: stratum+tcp://pool.braiins.com:3333
+- Solo CKPool: stratum+tcp://solo.ckpool.org:3333
+
+## How Payouts Work (Real Version)
+
+1. User earns 1,000+ sats on site
+2. User clicks Request Payout
+3. Admin (you) checks ad revenue in A-Ads / Coinzilla dashboard
+4. Admin sends BTC manually via Binance / Luno / BTCPay Server to user's wallet
+5. Mark payout as Paid in History
+
+For Auto Payout, use:
+- BTCPay Server (free, self-hosted)
+- LNbits + Lightning (free, instant, low fee)
+
+## How You Make Money
+
+User watches ad -> Ad partner pays you 50 sats -> You pay user 30 sats -> You keep 20 sats.
+
+Ad Partners:
+- A-Ads: https://a-ads.com
+- Coinzilla: https://coinzilla.com
+- Bitmedia: https://bitmedia.io
+- Cointraffic: https://cointraffic.io
+- AdEx: https://adex.network
+
+Replace `window.open("https://a-ads.com")` in index.html with your real ad link after you get approved.
+
+## Disclaimer
+
+Earnings depend on ad revenue + hashrate. Not investment advice.
+Never promise guaranteed returns. KJBTC is a faucet + pool dashboard, not a cloud mining investment.
+
+## Contact
+
+Advertise: ads@kjbtc.com
+Support: support@kjbtc.com
