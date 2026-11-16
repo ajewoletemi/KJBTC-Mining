@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html><head><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KJBTC Admin v2 - Payouts</title>
+<title>KJBTC Admin v3 - BTC Payouts</title>
 <style>
 *{box-sizing:border-box}body{background:#0B1A3A;color:#fff;font-family:Arial;margin:0}
-.top{background:#0052FF;padding:16px;text-align:center;font-size:22px;font-weight:900}
-.top span{color:#00E676}
+.top{background:#F7931A;padding:16px;text-align:center;font-size:22px;font-weight:900;color:#000}
+.top span{color:#fff}
 .c{padding:16px;max-width:560px;margin:0 auto;padding-bottom:80px}
 .card{background:#fff;color:#0B1A3A;border-radius:20px;padding:18px;margin-top:14px}
-.btn{background:linear-gradient(135deg,#0052FF,#00A3FF);color:#fff;border:none;padding:14px;width:100%;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;cursor:pointer}
-.btn.g{background:linear-gradient(135deg,#00C853,#00E676)}
-.btn.r{background:#FF3B30}
+.btn{background:linear-gradient(135deg,#F7931A,#FFB800);color:#000;border:none;padding:14px;width:100%;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;cursor:pointer}
+.btn.g{background:linear-gradient(135deg,#00C853,#00E676);color:#fff}
+.btn.r{background:#FF3B30;color:#fff}
 .btn.w{background:#fff;color:#0052FF;border:2px solid #0052FF}
 input{width:100%;padding:14px;border:2px solid #D6E0FF;border-radius:14px;margin-top:10px}
 .small{color:#5A6A8A;font-size:12px}
@@ -20,55 +20,66 @@ input{width:100%;padding:14px;border:2px solid #D6E0FF;border-radius:14px;margin
 .badge.paid{background:#00C853}.badge.rejected{background:#FF3B30}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .stat{background:#F2F6FF;border-radius:14px;padding:12px;text-align:center}
-.stat b{font-size:18px;color:#0052FF}.stat div{font-size:11px;color:#5A6A8A}
+.stat b{font-size:15px;color:#F7931A}.stat div{font-size:11px;color:#5A6A8A}
 .hidden{display:none}
 .warn{background:#FFF3E0;border:2px solid #FF6D00;border-radius:14px;padding:12px;margin-top:10px;color:#0B1A3A}
 </style></head>
 <body>
-<div class="top">KJ<span>BTC</span> Admin v2 👑 2X</div>
+<div class="top">KJ<span>BTC</span> Admin v3 👑 BTC</div>
 <div class="c">
 <div id="loginBox" class="card">
-<h2 style="margin:0;">Admin Login 🔒</h2><p class="small">Default PIN: <b>1234</b> — Change it in code after first login!</p>
+<h2 style="margin:0;">Admin Login 🔒</h2><p class="small">PIN: <b>1234</b> — Change it in code after first login!</p>
 <input id="adminPin" type="password" placeholder="Enter Admin PIN">
 <button class="btn" onclick="login()">Unlock Admin</button>
-<p class="small" style="text-align:center;">Keep this page SECRET. Do not share link.</p>
+<p class="small" style="text-align:center;">Keep this page SECRET.</p>
 </div>
 <div id="dash" class="hidden">
 <div class="grid">
 <div class="stat"><b id="totalReq">0</b><div>Requests</div></div>
-<div class="stat"><b id="totalPending">0</b><div>Pending Sats</div></div>
-<div class="stat"><b id="totalPaid">0</b><div>Paid Sats</div></div>
+<div class="stat"><b id="totalPending">0.00000000</b><div>Pending BTC</div></div>
+<div class="stat"><b id="totalPaid">0.00000000</b><div>Paid BTC</div></div>
 </div>
-<div class="warn"><b>⚠️ v2 Rules:</b><br>• Min Payout: <b>5,000 sats</b><br>• 2X Users earn ~34,560 / day<br>• Only approve if Ad Revenue > Pending<br>• Profit = Revenue - Paid</div>
+<div class="warn"><b>⚠️ v3 Rules:</b><br>• Min Payout: <b>0.00005000 BTC</b> (5,000 sats)<br>• 1 BTC = 100,000,000 sats<br>• Only approve if Revenue > Pending<br>• Profit = Revenue - Paid</div>
 <div class="card">
-<h3 style="margin:0;">💰 Your Balance (Admin)</h3>
-<p class="small">Ad Revenue - Paid = Your Profit</p>
-<p style="font-size:28px;font-weight:900;color:#0052FF;margin:5px 0;"><span id="profitVal">0</span> sats</p>
-<p class="small">Revenue: <b id="revShow">0</b> sats | Paid: <b id="paidShow">0</b> sats</p>
+<h3 style="margin:0;">💰 Your Profit (BTC)</h3>
+<p style="font-size:28px;font-weight:900;color:#F7931A;margin:5px 0;">₿ <span id="profitVal">0.00000000</span></p>
+<p class="small">Revenue: <b id="revShow">0.00000000</b> BTC | Paid: <b id="paidShow">0.00000000</b> BTC<br>≈ $<span id="profitUSD">0.00</span></p>
 </div>
 <div class="card">
-<h3 style="margin:0;">➕ Add Test Payout</h3><p class="small">Test with 5000+ sats</p>
+<h3 style="margin:0;">➕ Add Test Payout (BTC)</h3><p class="small">Test with 0.00005 BTC or more</p>
 <input id="testWallet" placeholder="User BTC Wallet">
-<input id="testAmt" type="number" placeholder="Amount sats e.g. 5000">
+<input id="testAmt" type="number" step="0.00000001" placeholder="Amount BTC e.g. 0.00005">
 <button class="btn g" onclick="addTest()">Add Request</button>
 </div>
 <div class="card">
-<h3 style="margin:0;">💸 Payout Requests (Min 5000)</h3>
+<h3 style="margin:0;">💸 BTC Payout Requests</h3>
 <div id="list">No requests yet.</div>
 <button class="btn w" onclick="clearAll()">🗑️ Clear All Requests</button>
 <button class="btn w" onclick="location.href='index.html'">← Back To KJBTC Site</button>
 </div>
 <div class="card">
-<h3 style="margin:0;">📢 Ad Revenue Tracker</h3><p class="small">Enter what A-Ads / Coinzilla paid you this week.</p>
-<input id="adRevenue" type="number" placeholder="Ad Revenue in sats e.g. 50000">
+<h3 style="margin:0;">📢 Ad Revenue Tracker (BTC)</h3><p class="small">Enter what A-Ads / Coinzilla / Video Ads paid you. Use BTC format: 0.001</p>
+<input id="adRevenue" type="number" step="0.00000001" placeholder="Ad Revenue BTC e.g. 0.001">
 <button class="btn" onclick="saveRevenue()">Save Revenue</button>
 <p class="small" id="revMsg"></p>
+</div>
+<div class="card">
+<h3 style="margin:0;">🎬 Video Ads Earnings</h3><p class="small">Partners: A-Ads • Coinzilla • Bitmedia • Cointraffic • AdEx • PropellerAds • Adsterra • CoinAd<br>Each video view ≈ 0.00000012 - 0.00000020 BTC to user</p>
 </div>
 </div>
 </div>
 <script>
 var ADMIN_PIN="1234";
+function toBTC(s){return (s/100000000).toFixed(8);}
+function toSats(b){return Math.round(b*100000000);}
 function login(){var p=document.getElementById("adminPin").value.trim();if(p===ADMIN_PIN){document.getElementById("loginBox").style.display="none";document.getElementById("dash").classList.remove("hidden");render();}else{alert("Wrong PIN! Default is 1234");}}
 function getReqs(){try{return JSON.parse(localStorage.getItem("kjbtc_payouts")||"[]");}catch(e){return [];}}
 function saveReqs(a){localStorage.setItem("kjbtc_payouts",JSON.stringify(a));render();}
-function addTest(){var w=document.getElementById("testWallet").value.trim();var a=parseInt(document.getElementById("testAmt").value||0);if(w.length<10||a<5000){alert("Min test is 5000 sats");return;}var arr=getReqs();arr.unshift({wallet:w,amount:a,status:"
+function addTest(){var w=document.getElementById("testWallet").value.trim();var btc=parseFloat(document.getElementById("testAmt").value||0);var a=toSats(btc);if(w.length<10||a<5000){alert("Min test is 0.00005000 BTC (5000 sats)");return;}var arr=getReqs();arr.unshift({wallet:w,amount:a,btc:btc.toFixed(8),status:"pending",time:new Date().toLocaleString(),tx:""});saveReqs(arr);document.getElementById("testWallet").value="";document.getElementById("testAmt").value="";alert("Added!");}
+function approve(i){var arr=getReqs();var r=arr[i];var btcVal=r.btc||toBTC(r.amount);var revSats=toSats(parseFloat(localStorage.getItem("kjbtc_revenue")||0));var paid=arr.filter(function(x){return x.status==="paid"}).reduce(function(s,x){return s+x.amount},0);if(revSats>0 && (paid+r.amount)>revSats){if(!confirm("⚠️ WARNING: Revenue "+toBTC(revSats)+" BTC, but paid would be "+toBTC(paid+r.amount)+" BTC. You will LOSE money. Approve anyway?"))return;}var tx=prompt("Pay "+btcVal+" BTC to:\n"+r.wallet+"\n\n1. Go to Binance / Luno\n2. Send "+btcVal+" BTC\n3. Paste TX ID here:");if(tx===null)return;if(!tx)tx="MANUAL-"+Date.now();r.status="paid";r.tx=tx;saveReqs(arr);alert("✅ Marked as PAID!\n"+btcVal+" BTC\nTX: "+tx);}
+function reject(i){if(!confirm("Reject this payout?"))return;var arr=getReqs();arr[i].status="rejected";saveReqs(arr);}
+function clearAll(){if(confirm("Delete ALL payout requests?")){localStorage.removeItem("kjbtc_payouts");render();}}
+function saveRevenue(){var v=document.getElementById("adRevenue").value;localStorage.setItem("kjbtc_revenue",v);render();}
+function render(){var arr=getReqs();document.getElementById("totalReq").innerText=arr.length;var pend=arr.filter(function(x){return x.status==="pending"}).reduce(function(s,x){return s+x.amount},0);var paid=arr.filter(function(x){return x.status==="paid"}).reduce(function(s,x){return s+x.amount},0);document.getElementById("totalPending").innerText=toBTC(pend);document.getElementById("totalPaid").innerText=toBTC(paid);var revBTC=parseFloat(localStorage.getItem("kjbtc_revenue")||0);document.getElementById("revShow").innerText=revBTC.toFixed(8);document.getElementById("paidShow").innerText=toBTC(paid);var profitSats=toSats(revBTC)-paid;document.getElementById("profitVal").innerText=toBTC(profitSats);document.getElementById("profitUSD").innerText=(profitSats*0.00065).toFixed(2);document.getElementById("revMsg").innerText=revBTC?"Saved Revenue: "+revBTC.toFixed(8)+" BTC | Profit: "+toBTC(profitSats)+" BTC":"";if(arr.length===0){document.getElementById("list").innerHTML="No requests yet.";return;}document.getElementById("list").innerHTML=arr.map(function(r,i){var btcVal=r.btc||toBTC(r.amount);var cls=r.status==="paid"?"paid":r.status==="rejected"?"rejected":"";return "<div class='payout "+cls+"'><b>₿ "+btcVal+" BTC</b> <span style='color:#5A6A8A;font-size:11px;'>("+r.amount+" sats)</span> <span class='badge "+r.status+"'>"+r.status.toUpperCase()+"</span><br><span class='small'>"+r.wallet+"<br>"+r.time+(r.tx?"<br>TX: "+r.tx:"")+"</span><br>"+(r.status==="pending"?"<button class='btn g' onclick='approve("+i+")'>✅ Approve & Mark Paid</button><button class='btn r' onclick='reject("+i+")'>❌ Reject</button>":"")+"</div>";}).join("");}
+</script>
+</body></html>
