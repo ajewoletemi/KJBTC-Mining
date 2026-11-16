@@ -1,98 +1,82 @@
 <!DOCTYPE html>
 <html><head><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KJBTC Mining - Mine BTC</title>
+<title>KJBTC - Earn BTC By Tasks</title>
 <style>
 *{box-sizing:border-box}body{background:#F2F6FF;color:#0B1A3A;font-family:Arial;margin:0}
 .top{background:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 16px rgba(0,80,255,.1);position:sticky;top:0;z-index:10}
 .logo{font-size:26px;font-weight:900;color:#0052FF}.logo span{color:#F7931A}
-.btn{background:linear-gradient(135deg,#0052FF,#00A3FF);color:#fff;border:none;padding:15px;width:100%;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;cursor:pointer;box-shadow:0 8px 18px rgba(0,82,255,.3)}
-.btn:active{transform:scale(.98)}.btn.w{background:#fff;color:#0052FF;border:2px solid #0052FF;box-shadow:none}
+.btn{background:linear-gradient(135deg,#0052FF,#00A3FF);color:#fff;border:none;padding:15px;width:100%;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;cursor:pointer}
+.btn.w{background:#fff;color:#0052FF;border:2px solid #0052FF}
 .btn.g{background:linear-gradient(135deg,#00C853,#00E676)}
 .btn.o{background:linear-gradient(135deg,#F7931A,#FFB800);color:#000}
 .c{padding:16px;max-width:520px;margin:0 auto;padding-bottom:110px}
-.hero{background:linear-gradient(135deg,#0B1A3A,#0052FF,#F7931A);color:#fff;border-radius:26px;padding:22px;box-shadow:0 16px 34px rgba(0,82,255,.4)}
-.big{font-size:32px;font-weight:900;line-height:1.1}.big span{font-size:14px;color:#FFE0B2}
-.card{background:#fff;border-radius:22px;padding:18px;margin-top:14px;box-shadow:0 8px 20px rgba(0,82,255,.08);border:1px solid #E0EAFF}
-input{width:100%;padding:15px;border:2px solid #D6E0FF;border-radius:14px;margin-top:10px;font-size:14px}
+.hero{background:linear-gradient(135deg,#0B1A3A,#0052FF,#F7931A);color:#fff;border-radius:26px;padding:22px}
+.big{font-size:32px;font-weight:900}.big span{font-size:14px;color:#FFE0B2}
+.card{background:#fff;border-radius:22px;padding:18px;margin-top:14px;box-shadow:0 8px 20px rgba(0,82,255,.08)}
+input{width:100%;padding:15px;border:2px solid #D6E0FF;border-radius:14px;margin-top:10px}
 .small{color:#5A6A8A;font-size:12px;line-height:1.5}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
 .stat{background:#F2F6FF;border-radius:16px;padding:12px;text-align:center}
-.stat b{font-size:16px;color:#0052FF}.stat div{font-size:11px;color:#5A6A8A}
-.tabs{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:12px 0;max-width:520px;margin:0 auto;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+.stat b{font-size:15px;color:#0052FF}.stat div{font-size:11px;color:#5A6A8A}
+.tabs{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:12px 0;max-width:520px;margin:0 auto}
 .tab{font-size:11px;text-align:center;flex:1;padding:6px;border-radius:12px;cursor:pointer;color:#5A6A8A}
 .tab.on{color:#fff;background:#0052FF}.tab span{display:block;font-size:20px}
-.hidden{display:none}.adbox{background:#fff;border:2px solid #E0EAFF;border-radius:18px;padding:14px;margin-top:10px}
-.videobox{background:#0B1A3A;color:#fff;border-radius:16px;padding:12px;margin-top:10px;text-align:center}
+.hidden{display:none}.videobox{background:#0B1A3A;color:#fff;border-radius:16px;padding:12px;margin-top:10px;text-align:center}
 .task{background:#F2F6FF;border-radius:16px;padding:14px;margin-top:10px;display:flex;justify-content:space-between;align-items:center}
-.task b{font-size:14px}.task span{font-size:11px;color:#5A6A8A}
 .payout{background:#E6F7EE;border:2px solid #00C853;padding:12px;border-radius:14px;margin-top:10px}
-.boostBox{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FF6D00;border-radius:16px;padding:12px;margin-top:10px;text-align:center}
 </style></head>
 <body>
-<div class="top"><div class="logo">KJ<span>BTC</span> Mining</div><div style="font-weight:800;color:#F7931A;">₿ <span id="topBal">0.00000000</span></div></div>
+<div class="top"><div class="logo">KJ<span>BTC</span></div><div style="font-weight:800;color:#F7931A;">₿ <span id="topBal">0.00000000</span></div></div>
 <div class="c">
 <div id="authBox" class="card">
-<h2 style="margin:0;">Mine Real Bitcoin ₿</h2><p class="small">Earn BTC by mining + video ads + easy tasks. Withdraw to any BTC wallet.<br>1 BTC = 100,000,000 sats</p>
+<h2 style="margin:0;">Earn Real BTC By Tasks ₿</h2><p class="small">No fake mining. Do real tasks, watch videos, get paid in BTC. Honest & sustainable.<br>1 BTC = 100,000,000 sats • Min payout 0.00005 BTC</p>
 <input id="btcWallet" placeholder="Your BTC Wallet e.g. bc1q...">
-<input id="userName" placeholder="Username e.g. KJUser">
-<button class="btn o" onclick="startMining()">🚀 Start Mining BTC</button>
-<p class="small" style="text-align:center;">Min Payout: <b>0.00005000 BTC</b> (5,000 sats) • Fee: 0</p>
+<input id="userName" placeholder="Username">
+<button class="btn o" onclick="startApp()">🚀 Start Earning BTC</button>
+<p class="small" style="text-align:center;">You keep 60% • KJBTC keeps 40% to pay servers & ads</p>
 </div>
 <div id="dash" class="hidden">
-<div class="hero"><p style="font-size:11px;letter-spacing:1px;">YOUR BITCOIN BALANCE</p><div class="big">₿ <span id="balance">0.00000000</span></div><p style="font-size:12px;"><span id="balanceSats">0 sats</span> • ≈ $<span id="usdVal">0.00</span> • Hash: <span id="hashRate">0</span> H/s • <span id="speedLabel">1X</span></p><div style="display:flex;gap:8px;margin-top:12px;"><span style="background:rgba(255,255,255,.25);padding:7px 12px;border-radius:20px;font-size:12px;">● Mining Active</span><span style="background:rgba(255,255,255,.25);padding:7px 12px;border-radius:20px;font-size:12px;" id="walletShort">—</span></div></div>
-<div class="grid"><div class="stat"><b id="statEarned">0.00000000</b><div>Total Earned BTC</div></div><div class="stat"><b id="statClaim">0</b><div>Tasks Done</div></div><div class="stat"><b>0.00005</b><div>Min Payout BTC</div></div><div class="stat"><b id="statBoost">1X</b><div>Boost</div></div></div>
+<div class="hero"><p style="font-size:11px;">YOUR BTC BALANCE</p><div class="big">₿ <span id="balance">0.00000000</span></div><p style="font-size:12px;"><span id="balanceSats">0 sats</span> • ≈ $<span id="usdVal">0.00</span> • Tasks: <span id="statClaim">0</span></p><p style="font-size:11px;background:rgba(255,255,255,.2);display:inline-block;padding:6px 10px;border-radius:20px;" id="walletShort">—</p></div>
+<div class="grid"><div class="stat"><b id="statEarned">0.00000000</b><div>Total Earned</div></div><div class="stat"><b id="statTasks">0</b><div>Tasks Done</div></div><div class="stat"><b>0.00005</b><div>Min Payout</div></div><div class="stat"><b>60%</b><div>Your Share</div></div></div>
 
-<div class="card"><h3 style="margin:0;">⛏️ BTC Miner</h3><p class="small">Earns BTC every 5 sec. 1X = 0.00000001 BTC / 5s • 2X = 0.00000002 BTC</p><div style="background:#F2F6FF;border-radius:14px;padding:12px;text-align:center;font-size:32px;" id="minerAnim">⛏️💤</div><p class="small" style="text-align:center;">Status: <b id="minerStatus">Stopped</b> • <b id="boostMsg">1X Normal</b></p><button class="btn g" id="mineBtn" onclick="toggleMiner()">▶️ Start Mining BTC</button>
-<div class="boostBox"><b>⚡ DOUBLE BTC MINING</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;"><button class="btn" style="background:linear-gradient(135deg,#FFB800,#FF6D00);margin:0;color:#000;" onclick="activateBoost(2)">⚡ 2X BOOST<br><span style="font-size:11px;">0.00034 BTC/day</span></button><button class="btn" style="background:linear-gradient(135deg,#7C4DFF,#0052FF);margin:0;" onclick="activateBoost(4)">👑 VIP 4X<br><span style="font-size:11px;">0.00069 BTC/day</span></button></div></div>
-<button class="btn w" onclick="claimFaucet()">🎁 Claim 0.00000010 BTC (60s)</button><button class="btn w" onclick="claimDaily()">📅 Daily Bonus 0.00000100 BTC</button><p class="small" id="claimMsg" style="text-align:center;color:#0052FF;font-weight:bold;"></p></div>
+<div class="card"><h3 style="margin:0;">🎁 Daily Rewards</h3><button class="btn w" onclick="claimFaucet()">🎁 Claim 0.00000010 BTC (60s)</button><button class="btn w" onclick="claimDaily()">📅 Daily Bonus 0.00000100 BTC</button><p class="small" id="claimMsg" style="text-align:center;color:#0052FF;font-weight:bold;"></p></div>
 
-<div class="card"><h3 style="margin:0;">🎬 Video Ads — Easiest BTC</h3><p class="small">Watch 30s video = BTC. No skill needed. Our partners pay for views.</p>
-<div class="videobox"><div style="font-size:40px;">▶️</div><b>Video Ad — Crypto.com</b><p class="small" style="color:#CDE8FF;">30 seconds • Earn 0.00000012 BTC</p><button class="btn o" onclick="watchVideo('Crypto.com Video',0.00000012)">▶️ Watch Video +0.00000012 BTC</button></div>
-<div class="videobox"><div style="font-size:40px;">▶️</div><b>Video Ad — Binance</b><p class="small" style="color:#CDE8FF;">30 seconds • Earn 0.00000015 BTC</p><button class="btn o" onclick="watchVideo('Binance Video',0.00000015)">▶️ Watch Video +0.00000015 BTC</button></div>
-<div class="videobox"><div style="font-size:40px;">▶️</div><b>Video Ad — Ledger</b><p class="small" style="color:#CDE8FF;">45 seconds • Earn 0.00000020 BTC</p><button class="btn o" onclick="watchVideo('Ledger Video',0.00000020)">▶️ Watch Video +0.00000020 BTC</button></div>
-<p class="small">Partners: A-Ads • Coinzilla • Bitmedia • Cointraffic • AdEx • PropellerAds • Adsterra</p>
+<div class="card"><h3 style="margin:0;">🎬 Video Ads — Easiest</h3><p class="small">Watch 30s = BTC. Partners pay us, we pay you.</p>
+<div class="videobox"><div style="font-size:40px;">▶️</div><b>Video — Crypto.com • 30s</b><p class="small" style="color:#CDE8FF;">Earn 0.00000012 BTC</p><button class="btn o" onclick="watchVideo('Crypto.com',0.00000012)">▶️ Watch +0.00000012 BTC</button></div>
+<div class="videobox"><div style="font-size:40px;">▶️</div><b>Video — Binance • 30s</b><p class="small" style="color:#CDE8FF;">Earn 0.00000015 BTC</p><button class="btn o" onclick="watchVideo('Binance',0.00000015)">▶️ Watch +0.00000015 BTC</button></div>
+<div class="videobox"><div style="font-size:40px;">▶️</div><b>Video — Ledger • 45s</b><p class="small" style="color:#CDE8FF;">Earn 0.00000020 BTC</p><button class="btn o" onclick="watchVideo('Ledger',0.00000020)">▶️ Watch +0.00000020 BTC</button></div>
 </div>
 
-<div class="card"><h3 style="margin:0;">✅ Easy Tasks — Earn BTC</h3><p class="small">No mining needed. Do task, get BTC instantly.</p>
-<div class="task"><div><b>📱 Visit Website (10s)</b><br><span>Visit partner site</span></div><button class="btn g" style="width:110px;margin:0;" onclick="doTask('Visit Website',0.00000008)">+0.00000008</button></div>
-<div class="task"><div><b>📝 Short Survey (1 min)</b><br><span>Answer 3 questions</span></div><button class="btn g" style="width:110px;margin:0;" onclick="doTask('Survey',0.00000020)">+0.00000020</button></div>
-<div class="task"><div><b>🎮 Play Game (2 min)</b><br><span>Play partner game</span></div><button class="btn g" style="width:110px;margin:0;" onclick="doTask('Play Game',0.00000025)">+0.00000025</button></div>
-<div class="task"><div><b>📲 Download App</b><br><span>Install partner app</span></div><button class="btn g" style="width:110px;margin:0;" onclick="doTask('Download App',0.00000050)">+0.00000050</button></div>
-<div class="task"><div><b>👥 Invite Friend</b><br><span>Share link, friend joins</span></div><button class="btn g" style="width:110px;margin:0;" onclick="doTask('Invite Friend',0.00000030)">+0.00000030</button></div>
+<div class="card"><h3 style="margin:0;">✅ Easy Tasks</h3>
+<div class="task"><div><b>📱 Visit Website (10s)</b><br><span>Visit partner site</span></div><button class="btn g" style="width:120px;margin:0;" onclick="doTask('Visit Website',0.00000008)">+0.00000008</button></div>
+<div class="task"><div><b>📝 Survey (1 min)</b><br><span>Answer 3 questions</span></div><button class="btn g" style="width:120px;margin:0;" onclick="doTask('Survey',0.00000020)">+0.00000020</button></div>
+<div class="task"><div><b>🎮 Play Game (2 min)</b><br><span>Play partner game</span></div><button class="btn g" style="width:120px;margin:0;" onclick="doTask('Play Game',0.00000025)">+0.00000025</button></div>
+<div class="task"><div><b>📲 Download App</b><br><span>Install partner app</span></div><button class="btn g" style="width:120px;margin:0;" onclick="doTask('Download App',0.00000050)">+0.00000050</button></div>
+<div class="task"><div><b>👥 Invite Friend</b><br><span>Share link</span></div><button class="btn g" style="width:120px;margin:0;" onclick="doTask('Invite Friend',0.00000030)">+0.00000030</button></div>
 </div>
 
-<div class="card"><h3 style="margin:0;">📺 Banner Ads</h3><div class="adbox"><b>📢 A-Ads — 0.00000006 BTC</b><button class="btn" style="background:#FFB800;color:#000;" onclick="watchAd('A-Ads',0.00000006)">View Ad</button></div><div class="adbox"><b>📢 Coinzilla — 0.00000010 BTC</b><button class="btn" onclick="watchAd('Coinzilla',0.00000010)">View Ad</button></div><div class="adbox"><b>📢 Bitmedia — 0.00000008 BTC</b><button class="btn" style="background:#7C4DFF;" onclick="watchAd('Bitmedia',0.00000008)">View Ad</button></div></div>
+<div class="card"><h3 style="margin:0;">👥 Refer & Earn 10%</h3><input id="refLink" readonly value="https://kjbtc-mining.onrender.com/?ref=YOURNAME"><button class="btn w" onclick="copyRef()">Copy Referral Link</button></div>
 
-<div class="card"><h3 style="margin:0;">👥 Refer & Earn 10% BTC</h3><input id="refLink" readonly value="https://kjbtc-mining.onrender.com/?ref=YOURNAME"><button class="btn w" onclick="copyRef()">Copy Referral Link</button></div>
-
-<div class="card"><h3 style="margin:0;">💰 Withdraw BTC</h3><p class="small">Wallet: <b id="withdrawWallet">—</b></p><input id="withdrawAmt" type="number" step="0.00000001" placeholder="Amount BTC e.g. 0.00005"><button class="btn g" onclick="requestPayout()">💸 Withdraw BTC (Min 0.00005)</button><div id="payoutMsg"></div><p class="small">Min 0.00005 BTC (5,000 sats). Processing 0-24h.</p></div>
-
-<div class="card"><h3 style="margin:0;">🔌 Real ASIC Mining</h3><p class="small">Pool: stratum+tcp://stratum.ckpool.org:3333<br>Worker: <span id="poolWorker">your_wallet.KJBTC1</span></p><button class="btn w" onclick="copyPool()">Copy Pool Settings</button></div>
+<div class="card"><h3 style="margin:0;">💰 Withdraw BTC</h3><p class="small">Wallet: <b id="withdrawWallet">—</b></p><input id="withdrawAmt" type="number" step="0.00000001" placeholder="Amount BTC e.g. 0.00005"><button class="btn g" onclick="requestPayout()">💸 Withdraw BTC (Min 0.00005)</button><div id="payoutMsg"></div><p class="small">Payout in 0-24h after admin checks ad revenue.</p></div>
 </div>
 <div id="tab-history" class="hidden"><div class="card"><h3>History</h3><div id="historyList">No earnings yet.</div></div></div>
-<div id="tab-ads" class="hidden"><div class="card"><h3>Ad Partners 🤝 (8 Partners)</h3><p><b>1. A-Ads</b> — BTC Video/Banner<br><b>2. Coinzilla</b> — Video CPM<br><b>3. Bitmedia</b> — Video Ads<br><b>4. Cointraffic</b> — Premium<br><b>5. AdEx</b> — Decentralized<br><b>6. PropellerAds</b> — Push/Video<br><b>7. Adsterra</b> — Video/Pop<br><b>8. CoinAd</b> — BTC Faucet Ads</p><button class="btn" onclick="alert('Advertise: ads@kjbtc.com')">Advertise On KJBTC</button></div></div>
+<div id="tab-ads" class="hidden"><div class="card"><h3>How KJBTC Pays You 💡</h3><p class="small">1. Advertisers pay KJBTC for video views<br>2. You watch / do task<br>3. You get 60% in BTC, KJBTC keeps 40% for servers<br>4. When you reach 0.00005 BTC, you withdraw<br><br>Partners: A-Ads, Coinzilla, Bitmedia, Cointraffic, AdEx, PropellerAds, Adsterra, CoinAd</p></div></div>
 </div>
-<div class="tabs"><div class="tab on" onclick="showTab('dash')"><span>₿</span>Mine BTC</div><div class="tab" onclick="showTab('history')"><span>🕒</span>History</div><div class="tab" onclick="showTab('ads')"><span>📢</span>Partners</div></div>
+<div class="tabs"><div class="tab on" onclick="showTab('dash')"><span>₿</span>Earn</div><div class="tab" onclick="showTab('history')"><span>🕒</span>History</div><div class="tab" onclick="showTab('ads')"><span>💡</span>How It Works</div></div>
 <script>
-var balSats=0,earnedSats=0,claims=0,mining=false,lastClaim=0,interval=null,history=[];
-function toBTC(s){return (s/100000000).toFixed(8);}
-function toSats(b){return Math.round(b*100000000);}
-function getBoost(){return parseInt(localStorage.getItem("kjbtc_boost")||"1")||1;}
-function startMining(){var w=document.getElementById("btcWallet").value.trim();var u=document.getElementById("userName").value.trim()||"KJUser";if(w.length<20){alert("Enter valid BTC wallet");return;}localStorage.setItem("kjbtc_user",JSON.stringify({wallet:w,name:u,bal:balSats,earned:earnedSats}));document.getElementById("authBox").style.display="none";document.getElementById("dash").classList.remove("hidden");document.getElementById("walletShort").innerText=w.slice(0,6)+"..."+w.slice(-4);document.getElementById("withdrawWallet").innerText=w;document.getElementById("poolWorker").innerText=w+".KJBTC1";document.getElementById("refLink").value="https://kjbtc-mining.onrender.com/?ref="+u;var b=getBoost();document.getElementById("boostMsg").innerText=b+"X";document.getElementById("speedLabel").innerText=b+"X";document.getElementById("statBoost").innerText=b+"X";alert("Welcome "+u+"! Mining BTC at "+b+"X");toggleMiner();}
-function toggleMiner(){mining=!mining;var b=document.getElementById("mineBtn");if(mining){b.innerText="⏸️ Stop Mining";document.getElementById("minerStatus").innerText="Mining BTC... ⛏️";document.getElementById("minerAnim").innerText="⛏️⚡₿";var r=getBoost();document.getElementById("hashRate").innerText=r*10;interval=setInterval(function(){addSats(getBoost(),"Mining x"+getBoost());},5000);}else{b.innerText="▶️ Start Mining BTC";document.getElementById("minerStatus").innerText="Stopped";document.getElementById("minerAnim").innerText="⛏️💤";document.getElementById("hashRate").innerText="0";clearInterval(interval);}}
-function addSats(n,src){balSats+=n;earnedSats+=n;updateUI();history.unshift(toBTC(n)+" BTC ("+n+" sats) - "+src+" - "+new Date().toLocaleTimeString());document.getElementById("historyList").innerHTML=history.slice(0,20).map(function(h){return "<div style='padding:8px 0;border-bottom:1px solid #eee;font-size:13px;'>"+h+"</div>";}).join("");}
+var balSats=0,earnedSats=0,claims=0,lastClaim=0,history=[];
+function toBTC(s){return (s/100000000).toFixed(8);}function toSats(b){return Math.round(b*100000000);}
+function startApp(){var w=document.getElementById("btcWallet").value.trim();var u=document.getElementById("userName").value.trim()||"KJUser";if(w.length<20){alert("Enter valid BTC wallet");return;}localStorage.setItem("kjbtc_user",JSON.stringify({wallet:w,name:u,bal:balSats,earned:earnedSats}));document.getElementById("authBox").style.display="none";document.getElementById("dash").classList.remove("hidden");document.getElementById("walletShort").innerText=w.slice(0,6)+"..."+w.slice(-4);document.getElementById("withdrawWallet").innerText=w;document.getElementById("refLink").value="https://kjbtc-mining.onrender.com/?ref="+u;alert("Welcome "+u+"! Do tasks to earn BTC.");}
+function addSats(n,src){balSats+=n;earnedSats+=n;updateUI();history.unshift(toBTC(n)+" BTC - "+src+" - "+new Date().toLocaleTimeString());document.getElementById("historyList").innerHTML=history.slice(0,20).map(function(h){return "<div style='padding:8px 0;border-bottom:1px solid #eee;font-size:13px;'>"+h+"</div>";}).join("");}
 function addBTC(b,src){addSats(toSats(b),src);}
-function updateUI(){document.getElementById("balance").innerText=toBTC(balSats);document.getElementById("topBal").innerText=toBTC(balSats);document.getElementById("balanceSats").innerText=balSats+" sats";document.getElementById("usdVal").innerText=(balSats*0.00065).toFixed(4);document.getElementById("statEarned").innerText=toBTC(earnedSats);document.getElementById("statClaim").innerText=claims;try{var u=JSON.parse(localStorage.getItem("kjbtc_user")||"{}");u.bal=balSats;u.earned=earnedSats;localStorage.setItem("kjbtc_user",JSON.stringify(u));}catch(e){}}
-function activateBoost(mult){if(mult===2){if(!confirm("Activate 2X BOOST? Earn 0.00000002 BTC / 5s = 0.00034 BTC/day. Watch 1 ad to unlock."))return;window.open("https://a-ads.com","_blank");localStorage.setItem("kjbtc_boost","2");document.getElementById("boostMsg").innerText="2X BOOST ACTIVE!";document.getElementById("speedLabel").innerText="2X";document.getElementById("statBoost").innerText="2X";alert("✅ 2X ACTIVATED!");if(mining){toggleMiner();toggleMiner();}}else{alert("👑 VIP 4X: Share your link. Activating demo now!");localStorage.setItem("kjbtc_boost","4");document.getElementById("boostMsg").innerText="4X VIP ACTIVE!";document.getElementById("speedLabel").innerText="4X";document.getElementById("statBoost").innerText="4X";if(mining){toggleMiner();toggleMiner();}}}
-function claimFaucet(){var now=Date.now();if(now-lastClaim<60000){alert("Wait "+Math.ceil((60000-(now-lastClaim))/1000)+"s");return;}lastClaim=now;claims++;addBTC(0.00000010,"Faucet");document.getElementById("claimMsg").innerText="✅ +0.00000010 BTC claimed!";}
-function claimDaily(){var last=localStorage.getItem("kjbtc_daily")||0;if(Date.now()-last<86400000){alert("Daily already claimed. Come back tomorrow!");return;}localStorage.setItem("kjbtc_daily",Date.now());addBTC(0.00000100,"Daily Bonus");alert("✅ +0.00000100 BTC Daily Bonus!");}
-function watchVideo(name,reward){if(!confirm("Watch "+name+" (30s) to earn "+reward+" BTC?"))return;window.open("https://www.youtube.com/results?search_query=crypto","_blank");setTimeout(function(){claims++;addBTC(reward,"Video: "+name);alert("✅ +"+reward+" BTC from "+name);},3000);}
-function doTask(name,reward){if(!confirm("Do task: "+name+" to earn "+reward+" BTC?"))return;window.open("https://a-ads.com","_blank");setTimeout(function(){claims++;addBTC(reward,"Task: "+name);alert("✅ +"+reward+" BTC — Task: "+name);},2000);}
-function watchAd(name,reward){if(!confirm("View "+name+" ad to earn "+reward+" BTC?"))return;window.open("https://a-ads.com","_blank");setTimeout(function(){addBTC(reward,"Ad: "+name);alert("✅ +"+reward+" BTC from "+name);},2000);}
+function updateUI(){document.getElementById("balance").innerText=toBTC(balSats);document.getElementById("topBal").innerText=toBTC(balSats);document.getElementById("balanceSats").innerText=balSats+" sats";document.getElementById("usdVal").innerText=(balSats*0.00065).toFixed(4);document.getElementById("statEarned").innerText=toBTC(earnedSats);document.getElementById("statClaim").innerText=claims;document.getElementById("statTasks").innerText=claims;try{var u=JSON.parse(localStorage.getItem("kjbtc_user")||"{}");u.bal=balSats;u.earned=earnedSats;localStorage.setItem("kjbtc_user",JSON.stringify(u));}catch(e){}}
+function claimFaucet(){var now=Date.now();if(now-lastClaim<60000){alert("Wait "+Math.ceil((60000-(now-lastClaim))/1000)+"s");return;}lastClaim=now;claims++;addBTC(0.00000010,"Faucet");document.getElementById("claimMsg").innerText="✅ +0.00000010 BTC!";}
+function claimDaily(){var last=localStorage.getItem("kjbtc_daily")||0;if(Date.now()-last<86400000){alert("Daily already claimed. Come back tomorrow!");return;}localStorage.setItem("kjbtc_daily",Date.now());addBTC(0.00000100,"Daily Bonus");alert("✅ +0.00000100 BTC Daily!");}
+function watchVideo(name,reward){if(!confirm("Watch "+name+" video (30s) for "+reward+" BTC?"))return;window.open("https://www.youtube.com/results?search_query=crypto","_blank");setTimeout(function(){claims++;addBTC(reward,"Video: "+name);alert("✅ +"+reward+" BTC from "+name);},3000);}
+function doTask(name,reward){if(!confirm("Do task: "+name+" for "+reward+" BTC?"))return;window.open("https://a-ads.com","_blank");setTimeout(function(){claims++;addBTC(reward,"Task: "+name);alert("✅ +"+reward+" BTC — "+name);},2000);}
 function copyRef(){var l=document.getElementById("refLink");l.select();try{document.execCommand("copy");}catch(e){}alert("Referral link copied!");}
-function copyPool(){alert("Pool:\nstratum+tcp://stratum.ckpool.org:3333\nWorker: "+document.getElementById("poolWorker").innerText);}
-function requestPayout(){var amtBTC=parseFloat(document.getElementById("withdrawAmt").value||0);var amtSats=toSats(amtBTC);if(amtSats<5000){alert("Min payout 0.00005000 BTC (5000 sats). You have "+toBTC(balSats)+" BTC");return;}if(amtSats>balSats){alert("Not enough. You have "+toBTC(balSats)+" BTC");return;}balSats-=amtSats;updateUI();document.getElementById("payoutMsg").innerHTML="<div class='payout'><b>✅ Payout Requested: "+amtBTC.toFixed(8)+" BTC</b><br>To: "+document.getElementById("withdrawWallet").innerText+"<br>Status: Pending (0-24h)</div>";try{var _p=JSON.parse(localStorage.getItem("kjbtc_payouts")||"[]");_p.unshift({wallet:document.getElementById("withdrawWallet").innerText,amount:amtSats,btc:amtBTC.toFixed(8),status:"pending",time:new Date().toLocaleString(),tx:""});localStorage.setItem("kjbtc_payouts",JSON.stringify(_p));}catch(e){}alert("Payout requested! "+amtBTC.toFixed(8)+" BTC will be sent after admin check.");}
+function requestPayout(){var amtBTC=parseFloat(document.getElementById("withdrawAmt").value||0);var amtSats=toSats(amtBTC);if(amtSats<5000){alert("Min 0.00005000 BTC. You have "+toBTC(balSats));return;}if(amtSats>balSats){alert("Not enough. You have "+toBTC(balSats));return;}balSats-=amtSats;updateUI();document.getElementById("payoutMsg").innerHTML="<div class='payout'><b>✅ Requested: "+amtBTC.toFixed(8)+" BTC</b><br>Status: Pending (0-24h)</div>";try{var _p=JSON.parse(localStorage.getItem("kjbtc_payouts")||"[]");_p.unshift({wallet:document.getElementById("withdrawWallet").innerText,amount:amtSats,btc:amtBTC.toFixed(8),status:"pending",time:new Date().toLocaleString(),tx:""});localStorage.setItem("kjbtc_payouts",JSON.stringify(_p));}catch(e){}alert("Payout requested!");}
 function showTab(t){document.getElementById("dash").classList.toggle("hidden",t!=="dash");document.getElementById("tab-history").classList.toggle("hidden",t!=="history");document.getElementById("tab-ads").classList.toggle("hidden",t!=="ads");var tabs=document.querySelectorAll(".tab");tabs.forEach(function(e){e.classList.remove("on");});if(t==="dash")tabs[0].classList.add("on");if(t==="history")tabs[1].classList.add("on");if(t==="ads")tabs[2].classList.add("on");}
-window.onload=function(){var s=localStorage.getItem("kjbtc_user");if(s){try{var u=JSON.parse(s);balSats=u.bal||0;earnedSats=u.earned||0;document.getElementById("btcWallet").value=u.wallet;document.getElementById("userName").value=u.name;document.getElementById("authBox").style.display="none";document.getElementById("dash").classList.remove("hidden");document.getElementById("walletShort").innerText=u.wallet.slice(0,6)+"...";document.getElementById("withdrawWallet").innerText=u.wallet;document.getElementById("poolWorker").innerText=u.wallet+".KJBTC1";var b=getBoost();document.getElementById("boostMsg").innerText=b+"X";document.getElementById("speedLabel").innerText=b+"X";document.getElementById("statBoost").innerText=b+"X";updateUI();}catch(e){}}};
+window.onload=function(){var s=localStorage.getItem("kjbtc_user");if(s){try{var u=JSON.parse(s);balSats=u.bal||0;earnedSats=u.earned||0;document.getElementById("btcWallet").value=u.wallet;document.getElementById("userName").value=u.name;document.getElementById("authBox").style.display="none";document.getElementById("dash").classList.remove("hidden");document.getElementById("walletShort").innerText=u.wallet.slice(0,6)+"...";document.getElementById("withdrawWallet").innerText=u.wallet;updateUI();}catch(e){}}};
 </script>
 </body></html>
