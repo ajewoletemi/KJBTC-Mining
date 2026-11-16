@@ -29,24 +29,22 @@ input{width:100%;padding:15px;border:2px solid #D6E0FF;border-radius:14px;margin
 <div class="top"><div class="logo">KJ<span>BTC</span></div><div style="font-weight:800;color:#F7931A;">₿ <span id="topBal">0.00000000</span></div></div>
 <div class="c">
 <div id="authBox" class="card">
-<h2 style="margin:0;">Earn Real BTC By Tasks ₿</h2><p class="small">No fake mining. Do real tasks, watch videos, get paid in BTC. Honest & sustainable.<br>1 BTC = 100,000,000 sats • Min payout 0.00005 BTC</p>
+<h2 style="margin:0;">Earn Real BTC By Tasks ₿</h2><p class="small">Do tasks, watch videos, get paid in BTC. Honest & sustainable.<br>1 BTC = 100,000,000 sats • Min payout 0.00005 BTC</p>
 <input id="btcWallet" placeholder="Your BTC Wallet e.g. bc1q...">
 <input id="userName" placeholder="Username">
 <button class="btn o" onclick="startApp()">🚀 Start Earning BTC</button>
-<p class="small" style="text-align:center;">You keep 60% • KJBTC keeps 40% to pay servers & ads</p>
+<p class="small" style="text-align:center;">You keep 60% • KJBTC keeps 40% for servers & ads</p>
 </div>
 <div id="dash" class="hidden">
 <div class="hero"><p style="font-size:11px;">YOUR BTC BALANCE</p><div class="big">₿ <span id="balance">0.00000000</span></div><p style="font-size:12px;"><span id="balanceSats">0 sats</span> • ≈ $<span id="usdVal">0.00</span> • Tasks: <span id="statClaim">0</span></p><p style="font-size:11px;background:rgba(255,255,255,.2);display:inline-block;padding:6px 10px;border-radius:20px;" id="walletShort">—</p></div>
 <div class="grid"><div class="stat"><b id="statEarned">0.00000000</b><div>Total Earned</div></div><div class="stat"><b id="statTasks">0</b><div>Tasks Done</div></div><div class="stat"><b>0.00005</b><div>Min Payout</div></div><div class="stat"><b>60%</b><div>Your Share</div></div></div>
-
+<div class="card"><h3 style="margin:0;">🔑 Redeem Admin Code</h3><p class="small">Admin gave you a code? Enter it here to get BTC instantly. Works on any phone.</p><input id="redeemCode" placeholder="Enter Code e.g. KJ4821"><button class="btn g" onclick="redeemCode()">🔑 Redeem Code + Get BTC</button></div>
 <div class="card"><h3 style="margin:0;">🎁 Daily Rewards</h3><button class="btn w" onclick="claimFaucet()">🎁 Claim 0.00000010 BTC (60s)</button><button class="btn w" onclick="claimDaily()">📅 Daily Bonus 0.00000100 BTC</button><p class="small" id="claimMsg" style="text-align:center;color:#0052FF;font-weight:bold;"></p></div>
-
 <div class="card"><h3 style="margin:0;">🎬 Video Ads — Easiest</h3><p class="small">Watch 30s = BTC. Partners pay us, we pay you.</p>
 <div class="videobox"><div style="font-size:40px;">▶️</div><b>Video — Crypto.com • 30s</b><p class="small" style="color:#CDE8FF;">Earn 0.00000012 BTC</p><button class="btn o" onclick="watchVideo('Crypto.com',0.00000012)">▶️ Watch +0.00000012 BTC</button></div>
 <div class="videobox"><div style="font-size:40px;">▶️</div><b>Video — Binance • 30s</b><p class="small" style="color:#CDE8FF;">Earn 0.00000015 BTC</p><button class="btn o" onclick="watchVideo('Binance',0.00000015)">▶️ Watch +0.00000015 BTC</button></div>
 <div class="videobox"><div style="font-size:40px;">▶️</div><b>Video — Ledger • 45s</b><p class="small" style="color:#CDE8FF;">Earn 0.00000020 BTC</p><button class="btn o" onclick="watchVideo('Ledger',0.00000020)">▶️ Watch +0.00000020 BTC</button></div>
 </div>
-
 <div class="card"><h3 style="margin:0;">✅ Easy Tasks</h3>
 <div class="task"><div><b>📱 Visit Website (10s)</b><br><span>Visit partner site</span></div><button class="btn g" style="width:120px;margin:0;" onclick="doTask('Visit Website',0.00000008)">+0.00000008</button></div>
 <div class="task"><div><b>📝 Survey (1 min)</b><br><span>Answer 3 questions</span></div><button class="btn g" style="width:120px;margin:0;" onclick="doTask('Survey',0.00000020)">+0.00000020</button></div>
@@ -54,9 +52,7 @@ input{width:100%;padding:15px;border:2px solid #D6E0FF;border-radius:14px;margin
 <div class="task"><div><b>📲 Download App</b><br><span>Install partner app</span></div><button class="btn g" style="width:120px;margin:0;" onclick="doTask('Download App',0.00000050)">+0.00000050</button></div>
 <div class="task"><div><b>👥 Invite Friend</b><br><span>Share link</span></div><button class="btn g" style="width:120px;margin:0;" onclick="doTask('Invite Friend',0.00000030)">+0.00000030</button></div>
 </div>
-
 <div class="card"><h3 style="margin:0;">👥 Refer & Earn 10%</h3><input id="refLink" readonly value="https://kjbtc-mining.onrender.com/?ref=YOURNAME"><button class="btn w" onclick="copyRef()">Copy Referral Link</button></div>
-
 <div class="card"><h3 style="margin:0;">💰 Withdraw BTC</h3><p class="small">Wallet: <b id="withdrawWallet">—</b></p><input id="withdrawAmt" type="number" step="0.00000001" placeholder="Amount BTC e.g. 0.00005"><button class="btn g" onclick="requestPayout()">💸 Withdraw BTC (Min 0.00005)</button><div id="payoutMsg"></div><p class="small">Payout in 0-24h after admin checks ad revenue.</p></div>
 </div>
 <div id="tab-history" class="hidden"><div class="card"><h3>History</h3><div id="historyList">No earnings yet.</div></div></div>
@@ -70,6 +66,7 @@ function startApp(){var w=document.getElementById("btcWallet").value.trim();var 
 function addSats(n,src){balSats+=n;earnedSats+=n;updateUI();history.unshift(toBTC(n)+" BTC - "+src+" - "+new Date().toLocaleTimeString());document.getElementById("historyList").innerHTML=history.slice(0,20).map(function(h){return "<div style='padding:8px 0;border-bottom:1px solid #eee;font-size:13px;'>"+h+"</div>";}).join("");}
 function addBTC(b,src){addSats(toSats(b),src);}
 function updateUI(){document.getElementById("balance").innerText=toBTC(balSats);document.getElementById("topBal").innerText=toBTC(balSats);document.getElementById("balanceSats").innerText=balSats+" sats";document.getElementById("usdVal").innerText=(balSats*0.00065).toFixed(4);document.getElementById("statEarned").innerText=toBTC(earnedSats);document.getElementById("statClaim").innerText=claims;document.getElementById("statTasks").innerText=claims;try{var u=JSON.parse(localStorage.getItem("kjbtc_user")||"{}");u.bal=balSats;u.earned=earnedSats;localStorage.setItem("kjbtc_user",JSON.stringify(u));}catch(e){}}
+function redeemCode(){var code=document.getElementById("redeemCode").value.trim().toUpperCase();if(!code){alert("Enter code");return;}if(localStorage.getItem("used_"+code)){alert("Code already used!");return;}if(code.startsWith("KJ")&&code.length===6){localStorage.setItem("used_"+code,"1");addBTC(0.00005,"Admin Redeem: "+code);alert("✅ Redeemed! +0.00005 BTC added!");}else{alert("Invalid code. Ask admin for KJ code e.g. KJ4821");}}
 function claimFaucet(){var now=Date.now();if(now-lastClaim<60000){alert("Wait "+Math.ceil((60000-(now-lastClaim))/1000)+"s");return;}lastClaim=now;claims++;addBTC(0.00000010,"Faucet");document.getElementById("claimMsg").innerText="✅ +0.00000010 BTC!";}
 function claimDaily(){var last=localStorage.getItem("kjbtc_daily")||0;if(Date.now()-last<86400000){alert("Daily already claimed. Come back tomorrow!");return;}localStorage.setItem("kjbtc_daily",Date.now());addBTC(0.00000100,"Daily Bonus");alert("✅ +0.00000100 BTC Daily!");}
 function watchVideo(name,reward){if(!confirm("Watch "+name+" video (30s) for "+reward+" BTC?"))return;window.open("https://www.youtube.com/results?search_query=crypto","_blank");setTimeout(function(){claims++;addBTC(reward,"Video: "+name);alert("✅ +"+reward+" BTC from "+name);},3000);}
