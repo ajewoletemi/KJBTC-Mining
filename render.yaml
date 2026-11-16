@@ -1,0 +1,6 @@
+services:
+    - type: static
+    name: kjbtc-mining
+    env: static
+    buildCommand: ""
+    staticPublishPath: .
