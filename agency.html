@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html><head><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KJ Web Studio - I Build Websites in Benin City</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#F2F6FF;color:#0B1A3A}
+.top{background:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 16px rgba(0,80,255,.1);position:sticky;top:0}
+.logo{font-size:22px;font-weight:900}.logo span{color:#0052FF}
+.btn{background:linear-gradient(135deg,#00C853,#00E676);color:#fff;border:none;padding:16px;width:100%;border-radius:14px;font-size:16px;font-weight:800;margin-top:10px;cursor:pointer}
+.btn.b{background:linear-gradient(135deg,#0052FF,#00A3FF)}
+.btn.o{background:linear-gradient(135deg,#F7931A,#FFB800);color:#000}
+.c{padding:16px;max-width:520px;margin:0 auto;padding-bottom:40px}
+.hero{background:linear-gradient(135deg,#0B1A3A,#0052FF);color:#fff;border-radius:26px;padding:24px;text-align:center}
+.hero h1{font-size:30px;margin:0;line-height:1.2}.hero p{color:#CDE8FF;font-size:14px}
+.card{background:#fff;border-radius:22px;padding:18px;margin-top:14px;box-shadow:0 8px 20px rgba(0,82,255,.08)}
+.price{border:2px solid #0052FF;border-radius:18px;padding:16px;margin-top:12px;text-align:center}
+.price.hot{border-color:#F7931A;background:#FFF8E1}
+.price b{font-size:26px}.price span{color:#5A6A8A;font-size:12px}
+input,textarea,select{width:100%;padding:14px;border:2px solid #D6E0FF;border-radius:14px;margin-top:10px;font-size:14px}
+.small{color:#5A6A8A;font-size:12px;line-height:1.6}
+.work{background:#F2F6FF;border-radius:16px;padding:14px;margin-top:10px}
+</style></head>
+<body>
+<div class="top"><div class="logo">KJ <span>Web Studio</span></div><div style="font-weight:800;">Benin City 🇳🇬</div></div>
+<div class="c">
+<div class="hero"><p style="font-size:12px;letter-spacing:1px;">⚡ WEBSITES IN 24 HOURS</p><h1>I Build Websites<br>That Get You Customers</h1><p>For Shops, Churches, Schools, Crypto & Small Business in Benin City & All Nigeria.</p><button class="btn" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">📱 Order On WhatsApp — ₦50,000</button><p style="font-size:11px;">✅ No Advance Scam • Pay 50% To Start • 50% After You See It Live</p></div>
+<div class="card"><h3 style="margin:0;">💼 My Recent Work</h3>
+<div class="work"><b>₿ KJBTC Mining</b> — Earn BTC Site<br><span class="small">Live on Render • Tasks + Payout System</span><br><a href="index.html">View Live →</a></div>
+<div class="work"><b>🏪 Business Website</b> — Shop / Restaurant<br><span class="small">Menu, WhatsApp Order, Google Map</span></div>
+<div class="work"><b>⛪ Church / School Website</b><br><span class="small">Gallery, Announcements, Registration Form</span></div>
+</div>
+<div class="card"><h3 style="margin:0;">💰 Pricing — Simple & Honest</h3>
+<div class="price"><b>₦50,000 / $50</b><br><span>1-Page Business Site • 24 Hours</span><br><p class="small">Home, About, Services, WhatsApp Button, Google Map</p><button class="btn b" onclick="orderSite('1-Page Business - N50000')">Order 1-Page →</button></div>
+<div class="price hot"><b>₦100,000 / $100 ⭐ MOST POPULAR</b><br><span>Full Website • 3-5 Pages • 48 Hours</span><br><p class="small">+ Admin Panel + Contact Form + SEO</p><button class="btn o" onclick="orderSite('Full Website - N100000')">Order Full Website →</button></div>
+<div class="price"><b>₦200,000 / $200</b><br><span>Online Store / Crypto Site • 3 Days</span><br><p class="small">+ Payments (Paystack / Crypto) + Admin</p><button class="btn" onclick="orderSite('Store / Crypto - N200000')">Order Store →</button></div>
+</div>
+<div class="card" id="order"><h3 style="margin:0;">📝 Order Your Website (2 mins)</h3><p class="small">Fill this, it opens WhatsApp to me directly.</p>
+<input id="bizName" placeholder="Your Business Name e.g. Mama Put Restaurant">
+<input id="bizType" placeholder="What do you sell? e.g. Food, Clothes, Crypto">
+<select id="bizPkg"><option>1-Page - ₦50,000 / $50</option><option>Full Website - ₦100,000 / $100</option><option>Store / Crypto - ₦200,000 / $200</option></select>
+<textarea id="bizNote" placeholder="What do you want on your site?"></textarea>
+<button class="btn" onclick="sendWhatsApp()">💬 Send Order On WhatsApp</button><p class="small" style="text-align:center;">Or call / WhatsApp directly: <b>+234 800 000 0000</b><br>Change this number in code to YOUR number!</p></div>
+<div class="card"><h3 style="margin:0;">⭐ Why Choose KJ?</h3><p class="small">✅ Live in 24 hours, not 2 weeks<br>✅ You see it LIVE before you pay balance<br>✅ Works on phone perfectly<br>✅ Free 7 days support after launch<br>✅ Based in Benin City, Edo State — I understand local business</p></div>
+</div>
+<script>
+function orderSite(pkg){document.getElementById("bizPkg").value=pkg.includes("1-Page")?"1-Page - ₦50,000 / $50":pkg.includes("Full")?"Full Website - ₦100,000 / $100":"Store / Crypto - ₦200,000 / $200";document.getElementById('order').scrollIntoView({behavior:'smooth'});}
+function sendWhatsApp(){var n=document.getElementById("bizName").value||"My Business";var t=document.getElementById("bizType").value||"Business";var p=document.getElementById("bizPkg").value;var note=document.getElementById("bizNote").value||"";var msg="Hello KJ! I want a website.%0A%0ABusiness: "+encodeURIComponent(n)+"%0AWhat I sell: "+encodeURIComponent(t)+"%0APackage: "+encodeURIComponent(p)+"%0ANote: "+encodeURIComponent(note);window.open("https://wa.me/2348000000000?text="+msg,"_blank");alert("WhatsApp opened! Send the message to KJ.");}
+</script>
+</body></html>
